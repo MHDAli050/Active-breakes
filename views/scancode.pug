@@ -1,0 +1,42 @@
+extends base
+
+block content 
+    main.main 
+        .card-container-active-breakes 
+        
+                .card
+                    .card__header
+                        .card__picture
+                            .card__picture-overlay-Active-Breakes &nbsp;
+                            img.card__picture-img(src=`img/Challenges.png`, alt=`Challenges`)
+                        h3.heading-tertirary
+                            span="Scan Now"
+
+                    .card__details
+                        h4.card__sub-heading=`Scan your challenge `
+                        .card__picture
+                            .card__picture-overlay-Active-Breakes &nbsp;
+                            img.card__picture-img(src=`img/Challenges.png`, alt=`Challenges`)
+
+                        .card__data
+                            svg.card__icon
+                                use(xlink:href='img/icons.svg#icon-map-pin')
+                            span='HTW Saar'
+                        .card__data
+                            svg.card__icon
+                                use(xlink:href='img/icons.svg#icon-calendar')
+                            span= 'November 2023'
+                        .card__data
+                            svg.card__icon
+                                use(xlink:href='img/icons.svg#icon-flag')
+                            span=`500 steps`
+                        .card__data
+                            svg.card__icon
+                                use(xlink:href='img/icons.svg#icon-user')
+                            span=`10 participants`
+
+                    .card__footer
+                        p
+                            span.card__footer-value=`For more Informations go to Details`
+                
+                        a.btn.btn--green.btn--small(href='#') Details
