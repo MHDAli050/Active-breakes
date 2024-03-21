@@ -12,11 +12,18 @@ block content
         .form__group
             label.form__label(for='email') Email address
             input#email.form__input(type='email', placeholder='you@example.com', required)
+        .form__group
+            label.form__label(for='date') Date
+            input#date.form__input(type='date', placeholder='25-10-2000', required)
+        .form__group.ma-bt-md
+            label.form__label(for='time') Password
+            input#time.form__input(type='time', placeholder='12-14', required)
         .form__group.ma-bt-md
             label.form__label(for='password') Password
             input#password.form__input(type='password', placeholder='••••••••', required, minlength='8')
         .form__group.ma-bt-md
             label.form__label(for='passwordConfirm') Confirm Password
             input#passwordConfirm.form__input(type='password', placeholder='••••••••', required, minlength='8')
+        
         .form__group
             button.btn.btn--green Sign up

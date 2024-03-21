@@ -16,14 +16,15 @@ export const login = async (email, password) => {
       },
     });
     if (res.data.status === 'success') {
-      showAlert('success', 'Logged in successfly Let us Start a Challenge!');
-      if (res.data.data.role === 'user') {
+      showAlert('success', 'Successfuly Logged in to Active Breakes');
+      console.log(res.data.data.user.role);
+      if (res.data.data.user.role === 'user') {
         window.setTimeout(() => {
-          location.assign('/allchallenges');
+          open().location.assign('/allchallenges');
         }, 1500);
-      } else if (res.data.data.role === 'admin') {
+      } else if (res.data.data.user.role === 'admin') {
         window.setTimeout(() => {
-          location.assign('/scancode');
+          open().location.assign('/jigsawMethod');
         }, 1500);
       }
     }

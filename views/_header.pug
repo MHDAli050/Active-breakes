@@ -4,12 +4,13 @@ header.header
     //-- const x= 9
     //-h2=2*x
     nav.nav.nav--tours
-        a.nav__el(href="/") All Challenges
+        a.nav__el(href="#") All Events
     div.header__logo
         img(src="/img/logo-white.png", alt="Natours logo")
     nav.nav.nav--user 
         if user
             a.nav__el.nav__el--logout Logout
+            a.nav__el.nav__el--cta(href='/createevent')  NewEvent
             a.nav__el(href="/me")
                 img.nav__user-img(src=`/img/users/${user.photo}`, alt=`${user.name} photo`)
                 span= user.name.split(' ')[0] 

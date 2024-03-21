@@ -1,0 +1,25 @@
+extends base
+
+block content 
+
+    main.main
+    .login-form
+      h2.heading-secondary.ma-bt-lg Create your Event
+      form.form.form-createevent
+        .form__group
+            label.form__label(for='title') Your Title
+            input#title.form__input(type='text', placeholder, required)
+        .form__group
+            label.form__label(for='The ESP-ID') Enter the ESP_ID
+            input#espId.form__input(type='text', placeholder, required)
+        .form__group
+            label.form__label(for='date') Date
+            input#date.form__input(type='date', placeholder='25-10-2000', required)
+        .form__group.ma-bt-md
+            label.form__label(for='startTime') Start Time
+            input#startTime.form__input(type='time', placeholder='12:14', required)
+        .form__group.ma-bt-md
+            label.form__label(for='endTime') End Time
+            input#endTime.form__input(type='time', placeholder='14:14', required)
+        .form__group
+            button.btn.btn--green Create Event

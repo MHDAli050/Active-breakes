@@ -1,0 +1,35 @@
+extends base
+include _feedbackCard
+
+
+mixin navItem(link,text,icon,active)
+  li(class=`${active} ? 'side-nav--active' : ''`)
+    a(href=`${link}`)
+       svg
+          use(xlink:href=`img/icons.svg#icon-${icon}`)
+       |#{text}
+
+block content 
+    main.main 
+        .event-view
+            nav.user-view__menu
+                ul.side-nav
+                    +navItem('/me','Settings','settings',true)
+                    +navItem('/allevents','All Events','briefcase')
+                    +navItem('/jigsawMethod','Start A Game','game')
+                    if events
+                     +navItem(`/events/myevent/${events[events.length -1].id}`,'Current Event','star')
+                    else
+                     +navItem(`/events/myevent/${myevent.id}`,'Current Event','star')
+
+            .event-view__content
+                if events
+                    .user-view__form-container
+                        h2.heading-secondary.ma-bt-md Your Event Details
+                        each event in events 
+                            h2= `Title : ${event.title}`
+                            h2= `Date : ${event.date}`
+                            h2= `Time : ${event.time}`
+                            a.btn.btn--green.btn--small(href=`/events/myevent/${event._id}`) Details
+
+                

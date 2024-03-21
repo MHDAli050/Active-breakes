@@ -1,0 +1,137 @@
+extends base
+include _feedbackCard
+
+
+mixin navItem(link,text,icon,active)
+  li(class=`${active} ? 'side-nav--active' : ''`)
+    a(href=`${link}`)
+       svg
+          use(xlink:href=`img/icons.svg#icon-${icon}`)
+       |#{text}
+
+block content 
+    main.main 
+        .event-view
+            nav.user-view__menu
+                ul.side-nav
+                    +navItem('/me','Settings','settings',true)
+                    +navItem('/allevents','All Events','briefcase')
+                    +navItem('/jigsawMethod','Start A Game','activity')
+                    if events
+                     +navItem(`/events/myevent/${events[0].id}`,'Current Event','star')
+                    else
+                     +navItem(`/events/myevent/${myevent.id}`,'Current Event','star')
+
+            .event-view__content
+                if events
+                    .user-view__form-container
+                        h2.heading-secondary.ma-bt-md Your Event Details
+                        each event in events 
+                            h2= `Title : ${event.title}`
+                            h2= `Date : ${event.date}`
+                            h2= `Time : ${event.time}`
+                            img(src=`/img/qrcode/qrevent-${event._id}.png`, alt=`${event.qrevent} photo`)
+                            
+                else
+                    
+                    .event-view__info-container
+                        h2.heading-secondary.ma-bt-md Your Event Details
+                            h2= `Title : ${myevent.title}`
+                            h2= `Date : ${myevent.date}`
+                            h2= `Time : ${myevent.time}`
+                            h2= `Number of Students  : ${myevent.ratingsQuantity}`
+                            h2#ratingsAverage= `The Evaluation is : ${myevent.ratingsAverage}`
+                            
+                            .reviews__rating
+                                each star in [1,2,3,4,5]
+                                    svg.reviews__star(class=`reviews__star--${myevent.ratingsAverage >= star ? 'active' : ''}`)
+                                        use(xlink:href='/img/icons.svg#icon-star')
+                    #plot
+                    
+        if myevent
+            section.section-header
+                .reviews
+                    if myevent.feedbacks
+                        each feedback in myevent.feedbacks
+                            +feedbackCard(feedback)
+
+                    else 
+                        h2= "Soory there is no feedback yet "
+                
+                script.
+                    const myevent = !{JSON.stringify(myevent)};
+                    const ratingsAverageElement = document.getElementById('ratingsAverage');
+                    const plotElement = document.getElementById('plot');
+                    const url = `/sse/${myevent._id}`;
+
+
+
+
+                    const eventSource = new EventSource(url);
+
+                    eventSource.addEventListener('message', function (event) {
+                    const data = JSON.parse(event.data); // Parse the string data into an object
+                    ratingsAverageElement.innerText = `Ratings Average: ${data.ratingsAverage}`;
+
+                    var time_points = [];  // Time points
+                    for(i=0;i<data.AveRatingsList.length;i++){time_points[i]=i+1}
+                    var average_ratings = data.AveRatingsList;  // Average ratings
+
+                    // Create a Plotly trace
+                    var trace = {
+                        x: time_points,
+                        y: average_ratings,
+                        mode: 'lines',// or 'lines+markers'
+                        type: 'scatter',
+                        line: {
+                            shape: 'spline', // Set the interpolation mode to spline for curved lines
+                            smoothing: 1.3 // Adjust the smoothing factor for the spline interpolation (optional)
+                            }
+                    };
+
+                    // Create a Plotly data array
+                    var data1  = [trace];
+
+                    // Define layout options
+                    var layout = {
+                        title: 'Average Ratings Over Time',
+                        xaxis: {
+                            title: ''
+                        },
+                        yaxis: {
+                            title: '',
+                            range: [0,6],
+                            tick0:0,
+                            dtick:1
+                        },
+                        plot_bgcolor: '#f8f9fa', // Set plot background color
+                        paper_bgcolor: '#ffffff', // Set paper background color
+                        font: {
+                            family: 'Arial, sans-serif',
+                            size: 14,
+                            color: '#333333' // Set font color
+                        },
+                        margin: {
+                            l: 50,
+                            r: 50,
+                            b: 50,
+                            t: 50,
+                            pad: 4
+                        },
+                        hovermode: 'closest',
+                        
+                        width: 400, // Set width to 500px
+                        height: 250 // Set height to 200px
+                        
+                    };
+
+                    // Plot the data
+                    Plotly.newPlot('plot', data1, layout);
+                    });
+
+                    eventSource.addEventListener('error', function (event) {
+                    console.error('SSE Error:', event);
+                    eventSource.close();
+                    });
+
+                

@@ -1,0 +1,48 @@
+extends base
+
+block content 
+
+    main.main
+    .login-form
+      h2.heading-secondary.ma-bt-lg Voting now 
+      form#feedbackform.form.form-voting
+        input#userId(type="hidden" name="userId" value=newStudent._id)
+        input#eventId(type="hidden" name="userId" value=newStudent.eventID)
+
+        fieldset
+            legend#ratingF.label-textarea Rating :
+            br
+            br
+            .form__group
+             input(type="radio", id="rating1", name="rating", value="1",style="appearance: none;")
+             label.btn.btn--green(for="rating1") 1/5  &starf;
+            .form__group
+             input(type="radio", id="rating2", name="rating", value="2",style="appearance: none;")
+             label.btn.btn--green(for="rating2") 2/5  &starf; &starf;
+            .form__group
+             input(type="radio", id="rating3", name="rating", value="3",style="appearance: none;")
+             label.btn.btn--green(for="rating3") 3/5  &starf; &starf; &starf;
+            .form__group
+             input(type="radio", id="rating4", name="rating", value="4",style="appearance: none;")
+             label.btn.btn--green(for="rating4") 4/5  &starf; &starf; &starf; &starf;
+            .form__group
+             input(type="radio", id="rating5", name="rating", value="5",style="appearance: none;")
+             label.btn.btn--green(for="rating5") 5/5  &starf; &starf; &starf; &starf; &starf;
+             br
+             br
+        br
+        label.label-textarea(for="feedback") Your Feedback:
+        br
+        fieldset
+            legend
+            .form__group
+             input(type="radio", id="feedback2", name="textContent", value="Content",checked)
+             label(for="feedback2") Content
+             input(type="radio", id="feedback1", name="textContent",value="Suggestion")
+             label(for="feedback1") Suggestion
+            
+
+        textarea#feedback.form__input(name="feedback", rows="4" cols="50")
+        br
+        br
+        input.btn.btn--green(type="submit", value="Submit Feedback")

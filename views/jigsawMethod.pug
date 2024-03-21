@@ -1,0 +1,82 @@
+extends base
+
+mixin navItem(link,text,icon,active)
+  li(class=`${active} ? 'side-nav--active' : ''`)
+    a(href=`${link}`)
+       svg
+          use(xlink:href=`img/icons.svg#icon-${icon}`)
+       |#{text}
+
+block content 
+
+    main.main
+      .event-view
+        nav.user-view__menu
+            ul.side-nav
+                +navItem('/me','Settings','settings',true)
+                +navItem('/allevents','All Events','briefcase')
+                +navItem('/jigsawMethod','Start A Game','activity')
+        .event-view__content
+            h2
+                .jigsaw_table Die Jigsaw Methode
+                table.table.table-ci.table-hover.table-template
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Was und wofür?
+                            td
+                                p(dir="ltr") Jigsaw-Methode (im deutschsprachigen Raum auch "Gruppenpuzzle" genannt) ist eine Form der Gruppenarbeit zur effizienten Bearbeitung von komplexen Themen. Der Gesamtstoff wird dabei in einzelne Themen aufgeteilt, die zunächst von einzelnen Studierenden bearbeitet, dann mit anderen Studierenden (welche das gleiche Thema zugeteilt bekommen haben) besprochen und schließlich der Gesamtgruppe präsentiert werden.
+                                p(dir="ltr") In der Abbildung wird die Aufteilung der Gruppen verdeutlicht: Jede Stammgruppe hat zu den verschiedenen Themen jeweils einen "Lerner". Diese Lerner treffen sich dann zu themengleichen Expertengruppen und danach kehren die Lerner wieder zu ihren ursprünglichen Stammgruppen zurück.
+                                p Das grundlegende Prinzip der Jigsaw-Methode ist der Wechsel zwischen der Erarbeitung eines Themas in den Expertengruppen und der Wissensvermittlung in den Stammgruppen. Die Besonderheit der Methode ist, dass Lernende gleichzeitig auch als Lehrende agieren.
+                                p Die Jigsaw-Methode eignet sich insbesondere zu Erarbeitung von längeren, komplexen Texten, zusätzlich sollte es sich dabei um neue Inhalte handeln.
+                                br
+                                br
+                        tr 
+                            td
+                                strong Wie?
+                            td
+                                p(dir="ltr")
+                                    strong Phase: Bildung der Stammgruppen
+                                    br
+                                    | In der ersten Phase stellen Sie als Lehrperson zunächst die Methode und das Thema/den zu bearbeitenden Text vor. Sie erklären, in welche Teilgebiete das Thema zerteilt wird und teilen die Studierende in Stammgruppen ein (alternativ können die Stammgruppen auch selbst entscheiden, wer welches Thema bearbeitet).
+                                p(dir="ltr") In jeder Stammgruppe werden von den einzelnen Studierenden unterschiedliche Teilgebiete erarbeitet, sodass jede Gruppe insgesamt alle Teilgebiete bearbeitet (siehe Abb.&nbsp;1). Jede/r Studierende wird dadurch zum/zur Experten/Expertin für ein Teilgebiet. Die Themenerarbeitung erfolgt in dieser Phase in Einzelarbeit, wobei es sich empfiehlt, Leitfragen mitzugeben, damit die Studierenden in der nächsten Phase die Ergebnisse leichter vergleichen können und die Ergebnisse sich im letzten Schritt des Gruppenpuzzles problemlos verknüpfen lassen.
+                                p(dir="ltr")
+                                    strong Phase: Expertengruppen
+                                    br
+                                    | Die Ergebnisse werden nun in den (nach Themengebiet) neu gebildeten Expertengruppen besprochen und verglichen. Die Studierenden unterstützen sich in der Phase gegenseitig dabei, "Expert/inn/en" zu werden, indem sie untereinander Verständnisfragen klären und gemeinsam überlegen, wie sie den anderen Mitgliedern der jeweiligen Stammgruppen am besten den Stoff vermitteln können.
+                                p(dir="ltr")
+                                    strong Phase: Zusammenfügen der Ergebnisse
+                                    br
+                                    | Die Expert/inn/en kehren in ihre Stammgruppen zurück und vermitteln den anderen Gruppenmitgliedern die zentralen Erkenntnisse des Teilgebietes. Anschließend daran werden gemeinsam Verknüpfungen erarbeitet um das Thema als Ganzes darstellen zu können.
+                                    br
+                                    br
+                        tr
+                            td
+                                strong Vorbereitung
+                            td 
+                                p(dir="ltr") Bereiten Sie vorab das Thema vor, teilen Sie es in möglichst gleichwertige, voneinander unabhängige Unterthemen und erstellen passende Leitfragen zur Bearbeitung der Themen.
+                                br
+                                br
+                        tr
+                            td
+                                strong Varianten&nbsp;
+                            td
+                                p(dir="ltr")
+                                    strong Leistungsüberprüfung
+                                    br
+                                    | Oft wird auch eine 4. Phase beschrieben: In der 4. Phase würde ein Test stattfinden, bei dem die Stammgruppen gegeneinander antreten (keine Einzel-, nur Gruppenbewertung). Dadurch werden das Konkurrenzprinzip, aber auch solidarisches Handeln und Motivation gefördert.
+                                    br
+                                    | Eine andere Möglichkeit zur Leistungsüberprüfung verlangt von den Studierenden einen erneuten Wechsel in die Rolle des/der Lehrenden: Die Expertengruppen überlegen sich gemeinsam Kontrollfragen, mit denen sie ihren Erfolg im Unterricht der Mitstudierenden überprüfen wollen.
+                                p(dir="ltr")
+                                    strong Gruppengrößen
+                                    br
+                                    | Falls die Studierenden sich nicht in gleich große Stammgruppen teilen lassen, ist es ratsam, die Expertenpositionen doppelt zu besetzen anstatt eine unvollständige Stammgruppe zu bilden: Diese Gruppe hätten ansonsten Schwierigkeiten, das Thema als Ganzes zu erfassen.
+                                    br
+                                    | Bei kleinerer Gruppengröße kann die Methode "Paar Jigsaw" angewandt werden: Es werden Paare statt Gruppen gebildet, die Studierenden teilen sich dann in zwei Expertengruppen und besprechen anschließend das Thema mit ihrem/ihrer Partner/in.
+                                p(dir="ltr")
+                                    strong Zeitfaktor
+                                    br
+                                    | Aus Zeitgründen kann der Prozess auch verkürzt werden, indem die Expert/inn/en sich zuhause vorbereiten. Der Unterricht beginnt dann mit der zweiten Phase, bei der sich die Expertengruppen formieren.
+
+                    

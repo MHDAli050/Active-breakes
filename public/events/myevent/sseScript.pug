@@ -1,0 +1,14 @@
+const ratingsAverageElement = document.getElementById('ratingsAverage');
+const url = `/sse/${myevent.id}`;
+
+const eventSource = new EventSource(url);
+
+eventSource.addEventListener('message', function (event) {
+  const data = event.data;
+  ratingsAverageElement.innerText = `Ratings Average: ${data}`;
+});
+
+eventSource.addEventListener('error', function (event) {
+  console.error('SSE Error:', event);
+  eventSource.close();
+});
