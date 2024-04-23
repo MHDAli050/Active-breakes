@@ -47,20 +47,22 @@ block content
                                     svg.reviews__star(class=`reviews__star--${myevent.ratingsAverage >= star ? 'active' : ''}`)
                                         use(xlink:href='/img/icons.svg#icon-star')
                     #plot
-                    
         if myevent
             section.section-header
-                .reviews
+                .reviews#feeds
+                    -var counter =0
                     if myevent.feedbacks
                         each feedback in myevent.feedbacks
-                            +feedbackCard(feedback)
+                            +feedbackCard(feedback,counter++)
 
                     else 
-                        h2= "Soory there is no feedback yet "
+                        h2= "Soory there is no feedbacks yet "                    
+
                 
                 script.
                     const myevent = !{JSON.stringify(myevent)};
                     const ratingsAverageElement = document.getElementById('ratingsAverage');
+                    const feedbacksElement = document.getElementById('feeds');
                     const plotElement = document.getElementById('plot');
                     const url = `/sse/${myevent._id}`;
 
@@ -71,8 +73,25 @@ block content
 
                     eventSource.addEventListener('message', function (event) {
                     const data = JSON.parse(event.data); // Parse the string data into an object
-                    ratingsAverageElement.innerText = `Ratings Average: ${data.ratingsAverage}`;
+                    if(data.ratingsAverage < 1.7){
+                       ratingsAverageElement.innerHTML = `The Evaluation is : ${data.ratingsAverage}   &#x1F62D;`; 
+                    }else if(data.ratingsAverage < 2.7){
+                       ratingsAverageElement.innerHTML = `The Evaluation is : ${data.ratingsAverage}   &#x1F613;`; 
+                    }else if(data.ratingsAverage < 3.7){
+                       ratingsAverageElement.innerHTML = `The Evaluation is : ${data.ratingsAverage}   &#x1F611;`; 
+                    }else if(data.ratingsAverage < 4.5){
+                       ratingsAverageElement.innerHTML = `The Evaluation is : ${data.ratingsAverage}   &#x1F60E;`; 
+                    }else {
+                       ratingsAverageElement.innerHTML = `The Evaluation is : ${data.ratingsAverage}   &#x1F60D;`; 
+                    }
 
+                    // update feedbacks Text
+                        feedbacksElement.innerHTML = `   
+                                                    -var counter =0
+                                                    if data.feedbacks
+                                                        each feedback in data.feedbacks
+                                                            +feedbackCard(feedback,counter++)`
+                    // update the diagram
                     var time_points = [];  // Time points
                     for(i=0;i<data.AveRatingsList.length;i++){time_points[i]=i+1}
                     var average_ratings = data.AveRatingsList;  // Average ratings

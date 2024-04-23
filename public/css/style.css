@@ -45,11 +45,16 @@ body {
 
 .main {
   background-color: #f7f7f7;
-  padding: 8rem 6rem;
+  padding: 4rem 4rem;
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
   position: relative;
+}
+@media only screen and (max-width: 62.5em) {
+  .main {
+    padding: 1rem 1rem;
+  }
 }
 
 .flex {
@@ -352,9 +357,9 @@ body {
 }
 
 .section-header {
-  position: relative;
-  height: 38vw;
-  clip-path: polygon(
+  position: static;
+  height: 21vw;
+  /*clip-path: polygon(
     0 0,
     100% 0,
     100% calc(100% - var(--section-rotate)),
@@ -365,7 +370,7 @@ body {
     100% 0,
     100% calc(100% - var(--section-rotate)),
     0 100%
-  );
+  );*/
 }
 
 .header__hero {
@@ -502,6 +507,43 @@ body {
   width: 2.25rem;
   fill: #55c57a;
 }
+/* Styles for modal Comments popup */
+.modal {
+  display: none;
+  position: absolute;
+  z-index: 1000;
+  left: 35%;
+  top: 40%;
+  width: 30%;
+  max-height: 350px;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  text-align: center;
+  overflow: hidden;
+  word-wrap: break-word;
+  padding: 10px;
+  border: 1px solid #888;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .overview-box__label {
   font-weight: 700;
   margin-right: 2.25rem;
@@ -647,6 +689,19 @@ body {
   -ms-flex-align: center;
   align-items: center;
 }
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 0; /* Higher than other elements but lower than the popup */
+}
+.reviews__card--suggestion {
+  background-color: #d7f6d3;
+}
 .reviews:before,
 .reviews:after {
   content: '';
@@ -673,9 +728,29 @@ body {
 }
 .reviews__text {
   font-size: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-style: italic;
   font-weight: 400;
+  max-width: 28rem;
+  max-height: 10rem;
+  overflow: auto;
+  word-wrap: break-word;
+  padding: 2rem 1rem;
+}
+.comments__text {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  font-weight: 400;
+  border-bottom-width: 0.5px;
+  border-bottom-style: groove;
+  border-bottom-color: #97e4fa;
+}
+.label__text {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  font-weight: 800;
 }
 .reviews__rating {
   margin-top: auto;
@@ -791,7 +866,7 @@ body {
 .user-view__menu {
   -webkit-box-flex: 32rem;
   -ms-flex: 32rem 0 0px;
-  flex: 32rem 0 0;
+  flex: 25rem 0 0;
   background-image: -webkit-gradient(
     linear,
     left top,
@@ -813,16 +888,66 @@ body {
   margin: 0 auto;
   padding: 0 8rem;
 }
+.heading-event-titel {
+  color: #20bf6b;
+  font-size: 3rem;
+  font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  padding: 0;
+}
+.game-container {
+  width: 100%;
+}
+.minus {
+  display: none;
+  margin-right: 1rem;
+  color: #aaa;
+  float: right;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.minus:hover,
+.minus:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.plus {
+  display: block;
+  margin-right: 1rem;
+  color: #aaa;
+  float: right;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.plus:hover,
+.plus:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+.table-jig {
+  display: none;
+}
 .jigsaw_table {
   text-align: center;
   padding-bottom: 8px;
+  margin: 0 3.5rem;
   color: rgb(106, 176, 108);
   font-weight: bolder;
   font-size: xx-large;
+  border: solid 1px;
+  background-color: bisque;
+  border-top-left-radius: 2rem;
+  border-bottom-right-radius: 2rem;
 }
 td {
   vertical-align: super;
-  padding-left: 18px;
+  padding: 3rem;
+  min-width: 15rem;
 }
 strong {
   font: bolder;
@@ -847,6 +972,9 @@ strong {
   margin: 0 auto;
   padding: 0 8rem;
 }
+#all-games {
+  flex-direction: column;
+}
 .event-view__content {
   display: flex;
   -webkit-box-flex: 1;
@@ -854,6 +982,127 @@ strong {
   flex: 1;
   width: 100%;
   padding: 7rem 0;
+}
+
+#slider-green {
+  display: flex;
+  width: 100%;
+  height: 10px;
+  accent-color: #20bf6b;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.slider input[type='range'] {
+  width: 100%;
+  height: 10px;
+  accent-color: #20bf6b;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+@media only screen and (max-width: 50em) {
+  .slider input[type='range'] {
+    width: 100%;
+    height: 10px;
+    accent-color: #20bf6b;
+    background: #d3d3d3;
+    cursor: pointer;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+  }
+}
+
+.slider input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 50%;
+  height: 15px;
+  background: #007bff;
+}
+
+.slider input[type='range']::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #007bff;
+  cursor: pointer;
+}
+
+.slider label {
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+}
+@media only screen and (max-width: 50em) {
+  .slider label {
+    font-size: 15px;
+  }
+}
+
+.slider label::before {
+  content: '';
+  position: absolute;
+  top: -30px; /* Adjust vertical position of emoji */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+}
+
+.vote-type1 {
+  display: none; /* Hide the divs by default */
+
+  margin-top: 5%;
+}
+
+/* Show the div when the corresponding radio button is checked */
+input[value='vote-type1']:checked ~ .vote-type1 {
+  display: block;
+}
+.vote-type2 {
+  display: none; /* Hide the divs by default */
+  margin-top: 10px;
+}
+
+/* Show the div when the corresponding radio button is checked */
+input[value='vote-type2']:checked ~ .vote-type2 {
+  display: block;
+}
+#styles {
+  margin-right: 6%;
+  margin-bottom: 4%;
+  padding-left: 3%;
+  background-color: white;
+  font-size: medium;
+}
+@media only screen and (max-width: 50em) {
+  #styles {
+    font-size: small;
+  }
+}
+#styles1 {
+  padding-left: 3%;
+
+  font-size: medium;
+}
+@media only screen and (max-width: 50em) {
+  #styles1 {
+    padding-left: 3%;
+
+    font-size: medium;
+  }
 }
 
 .footer {
@@ -1330,6 +1579,11 @@ strong {
   box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
   padding: 5rem 7rem;
   border-radius: 5px;
+}
+@media only screen and (max-width: 62.5em) {
+  .login-form {
+    padding: 5rem 6rem;
+  }
 }
 fieldset {
   border-style: none;

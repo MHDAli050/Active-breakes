@@ -4,45 +4,145 @@ block content
 
     main.main
     .login-form
-      h2.heading-secondary.ma-bt-lg Voting now 
+      h2.heading-event-titel.ma-bt-lg #{voteObject.currentEvent.title}
+      h2.heading-secondary.ma-bt-lg    Voting now 
       form#feedbackform.form.form-voting
-        input#userId(type="hidden" name="userId" value=newStudent._id)
-        input#eventId(type="hidden" name="userId" value=newStudent.eventID)
+        input#userId(type="hidden" name="userId" value=voteObject.newStudent._id)
+        input#eventId(type="hidden" name="userId" value=voteObject.newStudent.eventID)
+        
+        ul
 
-        fieldset
-            legend#ratingF.label-textarea Rating :
-            br
-            br
-            .form__group
-             input(type="radio", id="rating1", name="rating", value="1",style="appearance: none;")
-             label.btn.btn--green(for="rating1") 1/5  &starf;
-            .form__group
-             input(type="radio", id="rating2", name="rating", value="2",style="appearance: none;")
-             label.btn.btn--green(for="rating2") 2/5  &starf; &starf;
-            .form__group
-             input(type="radio", id="rating3", name="rating", value="3",style="appearance: none;")
-             label.btn.btn--green(for="rating3") 3/5  &starf; &starf; &starf;
-            .form__group
-             input(type="radio", id="rating4", name="rating", value="4",style="appearance: none;")
-             label.btn.btn--green(for="rating4") 4/5  &starf; &starf; &starf; &starf;
-            .form__group
-             input(type="radio", id="rating5", name="rating", value="5",style="appearance: none;")
-             label.btn.btn--green(for="rating5") 5/5  &starf; &starf; &starf; &starf; &starf;
-             br
-             br
+        input(type="radio", name="toggle", value="vote-type1",id="slider-style", checked)
+        label#styles(for="slider-style") Slider-Style      
+
+        input(type="radio", name="toggle", value="vote-type2",id="button-style")
+        label#styles(for="button-style") Button-Style 
+        br
+             
+
+
+
+        .vote-type1
+        
+
+          .slider
+            label(for="level1",onclick="updateSliderValue(1)") &#x1F62D; 1
+            label(for="level2",onclick="updateSliderValue(2)") &#x1F613; 2
+            label(for="level3",onclick="updateSliderValue(3)") &#x1F611; 3
+            label(for="level4",onclick="updateSliderValue(4)") &#x1F60E; 4
+            label(for="level5",onclick="updateSliderValue(5)") &#x1F60D; 5
+          br
+          .slider
+            input(type="range", name="slider", min="1", max="5", value=`${voteObject.currentFeedback ? voteObject.currentFeedback.rating : 3 }`, step="1", id="slider")
+
+
+        .vote-type2
+          fieldset
+              legend#ratingF.label-textarea Rating Now : #{voteObject.currentFeedback ? voteObject.currentFeedback.rating : ""}#{voteObject.currentFeedback ? "/5" : "" }
+              
+            
+              .form__group
+              input(type="radio", id="rating1", name="rating", value="1",style="appearance: none;")
+              label.btn.btn--green(for="rating1") 1/5  &starf;
+              .form__group
+              input(type="radio", id="rating2", name="rating", value="2",style="appearance: none;")
+              label.btn.btn--green(for="rating2") 2/5  &starf; &starf;
+              .form__group
+              input(type="radio", id="rating3", name="rating", value="3",style="appearance: none;")
+              label.btn.btn--green(for="rating3") 3/5  &starf; &starf; &starf;
+              .form__group
+              input(type="radio", id="rating4", name="rating", value="4",style="appearance: none;")
+              label.btn.btn--green(for="rating4") 4/5  &starf; &starf; &starf; &starf;
+              .form__group
+              input(type="radio", id="rating5", name="rating", value="5",style="appearance: none;")
+              label.btn.btn--green(for="rating5") 5/5  &starf; &starf; &starf; &starf; &starf;
+              br
+              br
         br
         label.label-textarea(for="feedback") Your Feedback:
         br
         fieldset
             legend
             .form__group
-             input(type="radio", id="feedback2", name="textContent", value="Content",checked)
-             label(for="feedback2") Content
-             input(type="radio", id="feedback1", name="textContent",value="Suggestion")
-             label(for="feedback1") Suggestion
+             input(type="radio", id="feedback2", name="textContent", value="false",checked)
+             label#styles1(for="feedback2") Content
+             input(type="radio", id="feedback1", name="textContent",value="true")
+             label#styles1(for="feedback1") Suggestion
+        if voteObject.currentFeedback
+          label.label__text#more-comments(onclick=`showComments()`) more comments ...
+          .modal(id=`dd`)
+                    .modal-content
+                        span.close(onclick=`closeComments()`) &times;
+                        #commentsContainer
+                            if voteObject.currentFeedback.comments
+                                each comment in voteObject.currentFeedback.comments 
+                                    p.comments__text(class=`${comment.suggestion ? 'reviews__card--suggestion' : ''}`)=comment.comment
+    
             
 
         textarea#feedback.form__input(name="feedback", rows="4" cols="50")
         br
         br
         input.btn.btn--green(type="submit", value="Submit Feedback")
+    script.
+      function updateSliderValue(value) {
+        document.getElementById('slider').value = value;
+      };
+      document.getElementById("more-comments").addEventListener('click', function(event) {
+        event.stopPropagation();
+      });
+      document.getElementById("dd").addEventListener('click', function(event) {
+        event.stopPropagation();
+      });
+
+      function showComments() {
+        const overlay = document.querySelector('.overlay');
+          if (overlay) {
+              overlay.style.display = "block"
+          };              
+        document.getElementById("dd").style.display = "block";
+      };
+      function closeComments() {
+          document.getElementById("dd").style.display = "none";
+          
+          const overlay = document.querySelector('.overlay');
+          if (overlay) {
+              overlay.style.display = "none"
+          };
+      };
+      document.addEventListener('keydown', function(event) {
+                        if (event.key === "Escape") {
+                                // Find all elements with the specific class
+                            const popups = document.querySelectorAll('.modal');
+                            // Close each popup
+                            popups.forEach(function(popup) {
+                            popup.style.display = "none";
+                            });
+                            const overlay = document.querySelector('.overlay');
+                            if (overlay) {
+                                overlay.style.display = "none"
+                            };
+
+                        }
+        });
+        const body = document.body
+        if (body) {
+          body.addEventListener('click', function(event) {
+            
+            //closeComments();
+              // Find all elements with the specific class
+              const popups = document.querySelectorAll('.modal');
+              // Close each popup
+              popups.forEach(function(popup) {
+                  popup.style.display = "none";
+              });
+              
+              // Remove overlay
+              
+              const overlay = document.querySelector('.overlay');
+              if (overlay) {
+                 overlay.style.display = "none"
+             };
+          });
+        }
+

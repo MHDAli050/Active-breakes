@@ -1,13 +1,78 @@
-mixin feedbackCard(feedback)
+mixin feedbackCard(feedback, counter)
+      if feedback.comments &&  feedback.comments.length > 0
+        .reviews__card(class=`${feedback.comments[feedback.comments.length -1].suggestion ? 'reviews__card--suggestion' : ''}`)
+            .reviews__avatar
+                //img.reviews__avatar-img(src=`/img/users/${review.user.photo}`, alt=`${review.user.name}`)
+                h6.reviews__user=feedback.user.name
+            #commentsContainer
+                p.reviews__text(class=`${feedback.comments[feedback.comments.length -1].suggestion ? 'reviews__card--suggestion' : ''}`)=feedback.comments[feedback.comments.length -1].comment
+            -var tempvalue = `${counter}`
+            if feedback.comments.length > 1
+                label.label__text(onclick=`showComments(${tempvalue})`) More comments ...
+                .modal(id=`${tempvalue}`)
+                    .modal-content
+                        span.close(onclick=`closeComments(${tempvalue})`) &times;
+                        #commentsContainer
+                            if feedback.comments
+                                each comment in feedback.comments 
+                                    p.comments__text(class=`${comment.suggestion ? 'reviews__card--suggestion' : ''}`)=comment.comment
+            .reviews__rating
+                each star in [1,2,3,4,5]
+                    svg.reviews__star(class=`reviews__star--${feedback.rating >= star ? 'active' : ''}`)
+                        use(xlink:href='/img/icons.svg#icon-star')
+      else
+        .reviews__card                                                            
+            .reviews__avatar
+                //img.reviews__avatar-img(src=`/img/users/${review.user.photo}`, alt=`${review.user.name}`)
+                h6.reviews__user=feedback.user.name
+            #commentsContainer
+                p.reviews__text
 
-    .reviews__card
-        .reviews__avatar
-            //img.reviews__avatar-img(src=`/img/users/${review.user.photo}`, alt=`${review.user.name}`)
-            h6.reviews__user=feedback.user.name 
-        p.reviews__text=feedback.feedback 
-        .reviews__rating
-            each star in [1,2,3,4,5]
-                svg.reviews__star(class=`reviews__star--${feedback.rating >= star ? 'active' : ''}`)
-                    use(xlink:href='/img/icons.svg#icon-star')
 
-                    
+            -var tempvalue = `${counter}`
+            if feedback.comments.length > 1
+                label.label__text(onclick=`showComments(${tempvalue})`) more comments ...
+                .modal(id=`${tempvalue}`)
+                    .modal-content
+                        span.close(onclick=`closeComments(${tempvalue})`) &times;
+                        #commentsContainer
+                            if feedback.comments
+                                each comment in feedback.comments 
+                                    p.comments__text(class=`${comment.suggestion ? 'reviews__card--suggestion' : ''}`)=comment.comment
+            .reviews__rating
+                each star in [1,2,3,4,5]
+                    svg.reviews__star(class=`reviews__star--${feedback.rating >= star ? 'active' : ''}`)
+                        use(xlink:href='/img/icons.svg#icon-star')
+
+                script.
+
+                    function showComments(value) {
+                        //create a div for the overlay, we can do it also with style.display 
+                        const overlay = document.createElement('div');
+                        overlay.className = 'overlay';
+                        document.body.appendChild(overlay);
+                        // display the comments
+                        document.getElementById(`${value.toString()}`).style.display = "block";
+                    };
+                    function closeComments(value) {
+                        const overlay = document.querySelector('.overlay');
+                        if (overlay) {
+                            overlay.parentNode.removeChild(overlay);
+                        };
+                        document.getElementById(`${value.toString()}`).style.display = "none";
+                    };
+                    document.addEventListener('keydown', function(event) {
+                        if (event.key === "Escape") {
+                                // Find all elements with the specific class
+                            const popups = document.querySelectorAll('.modal');
+                            // Close each popup
+                            popups.forEach(function(popup) {
+                            popup.style.display = "none";
+                            });
+                            const overlay = document.querySelector('.overlay');
+                            if (overlay) {
+                                overlay.parentNode.removeChild(overlay);
+                            };
+
+                        }
+                        });

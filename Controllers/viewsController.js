@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { isObjectIdOrHexString } = require('mongoose');
 const { promisify } = require('util');
 const Booking = require('../Model/bookingModel');
 const Tour = require('../Model/tourModel');
@@ -7,6 +8,7 @@ const Event = require('../Model/eventModel');
 const AppError = require('../utiles/AppError');
 const catchAsync = require('../utiles/catchAsync');
 const Student = require('../Model/studentsModel');
+const Feedback = require('../Model/feedbackModel');
 
 exports.getStartAB = catchAsync(async (req, res, next) => {
   res
@@ -74,7 +76,8 @@ exports.getOverview = catchAsync(async (req, res, next) => {
 exports.getEvents = catchAsync(async (req, res, next) => {
   // get tours data
 
-  const events = await Event.find();
+  const events = await Event.find({ user: req.user._id });
+  console.log(events);
   // Build the Template
   // Render the tours in the template
   res
@@ -113,8 +116,11 @@ exports.getOneEvent = catchAsync(async (req, res, next) => {
 
 exports.getMyEvent = catchAsync(async (req, res, next) => {
   // get tours data
-
-  const myevent = await Event.findById(req.params.id).populate('feedbacks');
+  //it is important here to do the populate process coreectly
+  const myevent = await Event.findById(req.params.id).populate({
+    path: 'feedbacks',
+    populate: { path: 'comments' },
+  });
 
   // Build the Template
   // Render the tours in the template
@@ -144,16 +150,38 @@ exports.reloadVote = catchAsync(async (token, req, res, next) => {
 
     //check if the user still exist
     const newStudent = await Student.findById(decoded.id);
-    console.log(newStudent);
+
     if (!newStudent) {
       this.studentSignup(req, res, next);
     } else {
-      console.log(req.params.id);
+      //if the id has been changed handel it
+      // eslint-disable-next-line no-lonely-if
       if (req.params.id !== newStudent.eventID) {
-        req.params.id = newStudent.eventID;
-        res.redirect(`/vote/${newStudent.eventID}`);
-        console.log(req.params.id);
+        //New voting Event
+        if (isObjectIdOrHexString(req.params.id)) {
+          const newevent = await Event.findById(req.params.id);
+          if (newevent) {
+            // passend the body request with the new Event-Id
+            req.body.eventID = req.params.id;
+            // make a new student accout for the new Voting process
+            this.studentSignup(req, res, next);
+            console.log(
+              'Hello from the new voting session , try to solve the validation problem'
+            );
+          }
+        } else {
+          //if the user have problems with id or try to manipulate "changing" the Id
+          req.params.id = newStudent.eventID;
+          res.redirect(`/vote/${newStudent.eventID}`);
+        }
       } else {
+        const currentFeedback = await Feedback.findOne({
+          event: req.params.id,
+          user: newStudent.id,
+        }).populate({ path: 'comments' });
+        const currentEvent = await Event.findById(req.params.id);
+        const voteObject = { currentFeedback, newStudent, currentEvent };
+        console.log(voteObject);
         res
           .status(200)
           .set(
@@ -162,7 +190,7 @@ exports.reloadVote = catchAsync(async (token, req, res, next) => {
           )
           .render('vote', {
             title: 'Go Vote ',
-            newStudent,
+            voteObject,
           });
       }
     }
@@ -178,6 +206,15 @@ const signToken = (id) =>
   });
 
 exports.studentSignup = catchAsync(async (req, res, next) => {
+  //this important to be sure that i am voting for an existing event
+  if (!isObjectIdOrHexString(req.params.id))
+    return next(
+      new AppError('This Event not exist to vote , no event id', 400)
+    );
+  const checkEvent = await Event.findById(req.params.id);
+  if (!checkEvent)
+    return next(new AppError('This Event not exist to vote', 400));
+  // now i create the student when everything is okay
   const newStudent = await Student.create(req.body);
   if (!newStudent) {
     return next(new AppError('There is no Document was created', 400));
@@ -195,6 +232,13 @@ exports.studentSignup = catchAsync(async (req, res, next) => {
     process.env.JWT_COOKIE_EXPIRES_IN * 60 * 1000,
     optionsCookie.expires
   );
+  const currentFeedback = await Feedback.findOne({
+    event: req.params.id,
+    user: newStudent.id,
+  }).populate({ path: 'comments' });
+  const currentEvent = await Event.findById(req.params.id);
+  const voteObject = { currentFeedback, newStudent, currentEvent };
+  console.log(voteObject);
   res.cookie('jwt', token, optionsCookie);
   res
     .status(201)
@@ -204,7 +248,7 @@ exports.studentSignup = catchAsync(async (req, res, next) => {
     )
     .render('vote', {
       title: 'Go Vote ',
-      newStudent,
+      voteObject,
     });
 });
 exports.getGoVote = catchAsync(async (req, res, next) => {

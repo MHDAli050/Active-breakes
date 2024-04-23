@@ -5,19 +5,16 @@ const Event = require('./eventModel');
 
 const feedbackSchema = new mongoose.Schema(
   {
-    feedback: {
-      type: String,
-      //required: [true, 'you should inter your review'],
-    },
     rating: {
       type: Number,
-      min: [1, 'your rate must be more than 1'],
-      max: [5, 'your rate must be less than 5'],
+      //min: [1, 'your rate must be more than 1'],
+      //max: [5, 'your rate must be less than 5'],
     },
     createdAt: {
       type: Date,
       default: Date.now(),
     },
+
     event: {
       type: mongoose.Schema.ObjectId,
       ref: 'Event',
@@ -35,11 +32,18 @@ const feedbackSchema = new mongoose.Schema(
   }
 );
 feedbackSchema.index({ event: 1, user: 1 }, { unique: true });
+
+feedbackSchema.virtual('comments', {
+  ref: 'Comment',
+  foreignField: 'feedback',
+  localField: '_id',
+});
 feedbackSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'user',
     select: 'name',
   });
+  //this.populate('comments');
   next();
 });
 

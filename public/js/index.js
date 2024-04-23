@@ -33,8 +33,21 @@ if (voteForm) {
     const userID = document.getElementById('userId').value;
     const eventID = document.getElementById('eventId').value;
     const text = document.getElementById('feedback').value;
-    const rating = document.querySelector('input[name="rating"]:checked').value;
-    await createFeedback(userID, eventID, text, rating);
+    const voteStyle = document.querySelector(
+      'input[name="toggle"]:checked'
+    ).value;
+    console.log(voteStyle);
+    let rating;
+    if (voteStyle == 'vote-type1') {
+      rating = document.querySelector('input[name="slider"]').value;
+      console.log(rating);
+    } else {
+      rating = document.querySelector('input[name="rating"]:checked').value;
+    }
+    const suggestion = document.querySelector(
+      'input[name="textContent"]:checked'
+    ).value;
+    await createFeedback(userID, eventID, text, rating, suggestion);
     document.getElementById('feedback').value = '';
     const checkedInput = document.querySelector('input[name="rating"]:checked');
     if (checkedInput) {

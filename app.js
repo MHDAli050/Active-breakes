@@ -21,7 +21,7 @@ const viewsRoutes = require('./Routers/viewsRoutes');
 //const toursRoutes = require('./Routers/toursRoutes');
 const usersRoutes = require('./Routers/usersRoutes');
 //const reviewRoutes = require('./Routers/reviewRoutes');
-//const bookingRoutes = require('./Routers/bookingRoutes');
+const commentsRoutes = require('./Routers/commentsRoutes');
 const eventRoutes = require('./Routers/eventRoutes');
 const feedbackRoutes = require('./Routers/feedbackRoutes');
 
@@ -117,6 +117,7 @@ app.use('/api/v1/users', usersRoutes);
 //app.use('/api/v1/bookings', bookingRoutes);
 app.use('/api/v1/events', eventRoutes);
 app.use('/api/v1/feedback', feedbackRoutes);
+app.use('/api/v1/comment', commentsRoutes);
 app.use('/sse', sseRoute);
 app.use('/', viewsRoutes);
 

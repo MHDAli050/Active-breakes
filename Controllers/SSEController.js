@@ -32,6 +32,8 @@ exports.updateRating = catchAsync(async (req, res, next) => {
   res.setHeader('Content-Type', 'text/event-stream');
   res.setHeader('Cache-Control', 'no-cache');
   res.setHeader('Connection', 'keep-alive');
+  const EventEspID = await Event.findById(req.params.id);
+  const { espId } = EventEspID;
   // Create a custom SSE stream
   const eventStream = new Readable({
     read() {},
@@ -51,7 +53,10 @@ exports.updateRating = catchAsync(async (req, res, next) => {
         change.updateDescription.updatedFields.ratingsAverage
       ) {
         const { ratingsAverage } = change.updateDescription.updatedFields;
-        const currentEvent = await Event.findById(req.params.id);
+        const currentEvent = await Event.findById(req.params.id).populate(
+          'feedbacks'
+        );
+        console.log(currentEvent.feedbacks.length);
         const currentAveList = currentEvent.AveRatingsList.slice();
         currentAveList.push(ratingsAverage);
         //currentEvent.AveRatingsList = currentAveList.slice();
@@ -62,14 +67,36 @@ exports.updateRating = catchAsync(async (req, res, next) => {
             new: true,
             runValidators: true,
           }
-        );
+        ).populate('feedbacks');
         if (!doc) {
           return next(new AppError('There is no Document with this Id', 404));
         }
-        const ServoValue = (ratingsAverage * 180) / 5;
+        //const ServoValue = (ratingsAverage * 360) / 5;
+        let ServoValue;
+        if (ratingsAverage < 1.7) {
+          ServoValue = 360;
+        } else if (ratingsAverage < 2.7) {
+          ServoValue = 45;
+        } else if (ratingsAverage < 3.7) {
+          ServoValue = 92;
+        } else if (ratingsAverage < 4.5) {
+          ServoValue = 140;
+        } else {
+          ServoValue = 180;
+        }
+
         //console.log(ServoValue);
-        console.log(currentEvent.AveRatingsList);
+        console.log(
+          currentEvent.createdAt.getTime() + 10 * 60 * 1000 > Date.now(),
+          ServoValue
+        );
+
         sendValueToDevice('esp-84:F3:EB:31:94:EE', ServoValue);
+
+        if (Date.now() < currentEvent.createdAt.getTime() + 55 * 60 * 1000) {
+          sendValueToDevice(espId, ServoValue);
+        }
+
         // Send change event to client
         sendSSE(doc);
       }
@@ -82,6 +109,7 @@ exports.updateRating = catchAsync(async (req, res, next) => {
   // Handle client disconnect
   req.on('close', () => {
     eventStream.destroy();
+    //sendValueToDevice('esp-84:F3:EB:31:94:EE', 0);
     console.log('SSE Stream  is closed');
   });
 });

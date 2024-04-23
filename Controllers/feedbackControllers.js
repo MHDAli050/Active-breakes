@@ -24,14 +24,12 @@ exports.getFeedbackByUserId = catchAsync(async (req, res, next) => {
       data: doc,
     },
   });
-  next();
 });
 exports.getAllFeedbacks = handlerFactory.getAllOne(Feedback);
 exports.getFeedback = handlerFactory.getOne(Feedback);
 exports.createFeedback = handlerFactory.createOne(Feedback);
 exports.deleteFeedback = handlerFactory.deleteOne(Feedback);
 exports.updateFeedback = catchAsync(async (req, res, next) => {
-  console.log(req.body);
   const doc = await Feedback.findOneAndUpdate(
     { user: req.body.user },
     req.body,

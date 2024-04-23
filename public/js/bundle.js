@@ -68219,7 +68219,7 @@ var createFeedback =
 function () {
   var _ref = _asyncToGenerator(
   /*#__PURE__*/
-  _regeneratorRuntime().mark(function _callee(userID, eventID, text, rating) {
+  _regeneratorRuntime().mark(function _callee(userID, eventID, text, rating, suggestion) {
     var res1, res, _res;
 
     return _regeneratorRuntime().wrap(function _callee$(_context) {
@@ -68227,7 +68227,7 @@ function () {
         case 0:
           _context.prev = 0;
           _context.next = 3;
-          return getFeedback(userID, eventID, text, rating);
+          return getFeedback(userID, eventID, text, rating, suggestion);
 
         case 3:
           res1 = _context.sent;
@@ -68239,7 +68239,7 @@ function () {
 
           (0, _alert.showAlert)('success', 'Feedback was founded successfuly!!!');
           _context.next = 8;
-          return updateFeedback(userID, eventID, text, rating);
+          return updateFeedback(userID, eventID, text, rating, suggestion);
 
         case 8:
           res = _context.sent;
@@ -68257,7 +68257,7 @@ function () {
 
         case 12:
           _context.next = 14;
-          return postFeedback(userID, eventID, text, rating);
+          return postFeedback(userID, eventID, text, rating, suggestion);
 
         case 14:
           _res = _context.sent;
@@ -68286,7 +68286,7 @@ function () {
     }, _callee, null, [[0, 18]]);
   }));
 
-  return function createFeedback(_x, _x2, _x3, _x4) {
+  return function createFeedback(_x, _x2, _x3, _x4, _x5) {
     return _ref.apply(this, arguments);
   };
 }();
@@ -68298,35 +68298,68 @@ var updateFeedback =
 function () {
   var _ref2 = _asyncToGenerator(
   /*#__PURE__*/
-  _regeneratorRuntime().mark(function _callee2(userID, eventID, text, rating) {
+  _regeneratorRuntime().mark(function _callee2(userID, eventID, text, rating, suggestion) {
     var res;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
-          _context2.next = 2;
+          _context2.prev = 0;
+          _context2.next = 3;
           return (0, _axios.default)({
             method: 'PATCH',
             url: '/api/v1/feedback/createfeedback',
             data: {
               user: userID,
               event: eventID,
-              feedback: text,
-              rating: rating
+              // feedback: text,
+              rating: rating // suggestion: suggestion,
+
             }
           });
 
-        case 2:
+        case 3:
           res = _context2.sent;
+          console.log(res.data.data); // add comment for the feedback.
+
+          if (!(text !== '')) {
+            _context2.next = 9;
+            break;
+          }
+
+          if (!(res.data.status === 'success')) {
+            _context2.next = 9;
+            break;
+          }
+
+          _context2.next = 9;
+          return (0, _axios.default)({
+            method: 'POST',
+            url: '/api/v1/comment/createcomment',
+            data: {
+              comment: text,
+              //event: eventID,
+              feedback: res.data.data.doc._id,
+              //rating: rating,
+              suggestion: suggestion
+            }
+          });
+
+        case 9:
           return _context2.abrupt("return", res);
 
-        case 4:
+        case 12:
+          _context2.prev = 12;
+          _context2.t0 = _context2["catch"](0);
+          (0, _alert.showAlert)('error', 'Comment');
+
+        case 15:
         case "end":
           return _context2.stop();
       }
-    }, _callee2);
+    }, _callee2, null, [[0, 12]]);
   }));
 
-  return function updateFeedback(_x5, _x6, _x7, _x8) {
+  return function updateFeedback(_x6, _x7, _x8, _x9, _x10) {
     return _ref2.apply(this, arguments);
   };
 }();
@@ -68336,7 +68369,7 @@ var getFeedback =
 function () {
   var _ref3 = _asyncToGenerator(
   /*#__PURE__*/
-  _regeneratorRuntime().mark(function _callee3(userID, eventID, text, rating) {
+  _regeneratorRuntime().mark(function _callee3(userID, eventID, text, rating, suggestion) {
     var res;
     return _regeneratorRuntime().wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
@@ -68349,7 +68382,8 @@ function () {
               user: userID,
               event: eventID,
               feedback: text,
-              rating: rating
+              rating: rating,
+              suggestion: suggestion
             }
           });
 
@@ -68364,7 +68398,7 @@ function () {
     }, _callee3);
   }));
 
-  return function getFeedback(_x9, _x10, _x11, _x12) {
+  return function getFeedback(_x11, _x12, _x13, _x14, _x15) {
     return _ref3.apply(this, arguments);
   };
 }();
@@ -68374,35 +68408,68 @@ var postFeedback =
 function () {
   var _ref4 = _asyncToGenerator(
   /*#__PURE__*/
-  _regeneratorRuntime().mark(function _callee4(userID, eventID, text, rating) {
+  _regeneratorRuntime().mark(function _callee4(userID, eventID, text, rating, suggestion) {
     var res;
     return _regeneratorRuntime().wrap(function _callee4$(_context4) {
       while (1) switch (_context4.prev = _context4.next) {
         case 0:
-          _context4.next = 2;
+          _context4.prev = 0;
+          _context4.next = 3;
           return (0, _axios.default)({
             method: 'POST',
             url: '/api/v1/feedback/createfeedback',
             data: {
               user: userID,
               event: eventID,
-              feedback: text,
-              rating: rating
+              //feedback: text,
+              rating: rating //suggestion: suggestion,
+
             }
           });
 
-        case 2:
+        case 3:
           res = _context4.sent;
+          console.log(text);
+
+          if (!(text != '')) {
+            _context4.next = 9;
+            break;
+          }
+
+          if (!(res.data.status === 'success')) {
+            _context4.next = 9;
+            break;
+          }
+
+          _context4.next = 9;
+          return (0, _axios.default)({
+            method: 'POST',
+            url: '/api/v1/comment/createcomment',
+            data: {
+              comment: text,
+              //event: eventID,
+              feedback: res.data.data.newDoc._id,
+              //rating: rating,
+              suggestion: suggestion
+            }
+          });
+
+        case 9:
           return _context4.abrupt("return", res);
 
-        case 4:
+        case 12:
+          _context4.prev = 12;
+          _context4.t0 = _context4["catch"](0);
+          (0, _alert.showAlert)('error', 'Comment');
+
+        case 15:
         case "end":
           return _context4.stop();
       }
-    }, _callee4);
+    }, _callee4, null, [[0, 12]]);
   }));
 
-  return function postFeedback(_x13, _x14, _x15, _x16) {
+  return function postFeedback(_x16, _x17, _x18, _x19, _x20) {
     return _ref4.apply(this, arguments);
   };
 }();
@@ -68705,7 +68772,7 @@ if (voteForm) {
     var _ref = _asyncToGenerator(
     /*#__PURE__*/
     _regeneratorRuntime().mark(function _callee(e) {
-      var userID, eventID, text, rating, checkedInput;
+      var userID, eventID, text, voteStyle, rating, suggestion, checkedInput;
       return _regeneratorRuntime().wrap(function _callee$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
@@ -68714,11 +68781,21 @@ if (voteForm) {
             userID = document.getElementById('userId').value;
             eventID = document.getElementById('eventId').value;
             text = document.getElementById('feedback').value;
-            rating = document.querySelector('input[name="rating"]:checked').value;
-            _context.next = 8;
-            return (0, _createfeedback.createFeedback)(userID, eventID, text, rating);
+            voteStyle = document.querySelector('input[name="toggle"]:checked').value;
+            console.log(voteStyle);
 
-          case 8:
+            if (voteStyle == 'vote-type1') {
+              rating = document.querySelector('input[name="slider"]').value;
+              console.log(rating);
+            } else {
+              rating = document.querySelector('input[name="rating"]:checked').value;
+            }
+
+            suggestion = document.querySelector('input[name="textContent"]:checked').value;
+            _context.next = 11;
+            return (0, _createfeedback.createFeedback)(userID, eventID, text, rating, suggestion);
+
+          case 11:
             document.getElementById('feedback').value = '';
             checkedInput = document.querySelector('input[name="rating"]:checked');
 
@@ -68726,7 +68803,7 @@ if (voteForm) {
               checkedInput.checked = false;
             }
 
-          case 11:
+          case 14:
           case "end":
             return _context.stop();
         }
@@ -68859,7 +68936,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59325" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57706" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

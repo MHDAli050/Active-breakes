@@ -16,10 +16,12 @@ block content
                 +navItem('/me','Settings','settings',true)
                 +navItem('/allevents','All Events','briefcase')
                 +navItem('/jigsawMethod','Start A Game','activity')
-        .event-view__content
-            h2
-                .jigsaw_table Die Jigsaw Methode
-                table.table.table-ci.table-hover.table-template
+        .event-view__content#all-games
+            h2.game-container
+                span.plus#2(onclick=`openGame(1)`,style="display:block;") &plus;
+                span.minus#3(onclick=`closeGame(1)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(1)') Die Jigsaw Methode
+                table.table.table-jig.table-hover.table-template#1(style="display:none;")
                     thead
                     tbody
                         tr
@@ -79,4 +81,421 @@ block content
                                     br
                                     | Aus Zeitgründen kann der Prozess auch verkürzt werden, indem die Expert/inn/en sich zuhause vorbereiten. Der Unterricht beginnt dann mit der zweiten Phase, bei der sich die Expertengruppen formieren.
 
-                    
+            h2.game-container
+                span.plus#5(onclick=`openGame(4)`,style="display:block;") &plus;
+                span.minus#6(onclick=`closeGame(4)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(4)') Problemlösungsauftrag
+                table.table.table-jig.table-hover.table-template#4(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                p
+                                    strong Wie?
+                            td
+                                p Geben Sie eine Aufgaben- oder Problemstellung vor. Diese können Sie in unterschiedlicher Form zur Verfügung stellen, z.&nbsp; B. als:
+                                ul
+                                    li Karikatur
+                                    li Diagramm, Tabelle, Modell, Graph
+                                    li Case-Study
+                                    li Videoclip
+                                    li Anekdote
+                                p Stellen Sie eine Frage im Plenum oder lassen Sie die Studierenden ggf. zu zweit diskutieren (z. B. "<a href="#turntoyourneighbour">Turn to your Neighbour</a>"). Sammeln Sie Antworten im Plenum und diskutieren Sie sie.
+                        tr
+                            td
+                                strong Wofür?
+                            td
+                                ul
+                                    li Die Lehrinhalte für Studierende relevant machen und Verbindungen zu bereits bestehenden Erfahrungen und Kenntnissen herstellen
+                                    li Über reines Wissen hinausgehende Fähigkeiten wie Problemlösung und analytisches Denken fördern
+                                    li Einen aktivierenden Einstieg in eine Thematik schaffen
+                                    li Studierende bereits Gehörtes auf praktische Problemstellungen anwenden lassen
+                   
+
+            h2.game-container
+                span.plus#8(onclick=`openGame(7)`,style="display:block;") &plus;
+                span.minus#9(onclick=`closeGame(7)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(7)') Pro-Kontra-Argumentation
+                table.table.table-jig.table-hover.table-template#7(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Was und wofür?
+                            td
+                                p In einer Pro-Kontra Debatte ("Wortschlacht") stehen sich zwei Gruppen/Personen gegenüber, die versuchen eine Meinung einer konträren Fragestellung argumentativ bestmöglich zu vertreten. Debatten laufen nach klar vordefinierten Regeln ab und "zwingen" Studierende eine der beiden Positionen (die möglicherweise nicht der eigenen Position entspricht) einzunehmen.
+                                p Die Pro-Kontra-Debatte eignet sich:
+                                ul
+                                    li Als Kernelement einer LV-Einheit (unterschiedliche Perspektiven zu einem inhaltlichen Thema einnehmen können)
+                                    li Im Anschluss an eine Arbeitsphase zum Austausch von Meinungen und Argumenten (Gelerntes wiederholen, festigen, zusammenfassen)
+                        tr
+                            td
+                                strong Vorbereitung
+                            td
+                                ul
+                                    li Zur Vorbereitung wählen Sie ein Thema bzw. eine Fragestellung, zu dem sowohl eine Pro- als auch eine Kontra-Haltung eingenommen werden kann.
+                                    li Fragestellungen/Themengebiete können unterschiedliche Komplexitätsgrade aufweisen aber auch unterschiedlich heftige Kontroversen auslösen. Um einen zufriedenstellenden Diskussionsverlauf zu erzielen wäre es möglicherweise sinnvoll bei der Themenwahl bzw. der Wahl der Fragestellung beide Aspekte zu beachten, da der erwartete Diskussionsverlauf Auswirkungen auf ihre Rolle in der Lehrveranstaltung hat. Je kontroversieller das Thema bzw. die Fragestellung für die Studierenden ist, desto aufgeheizter kann die Debatte verlaufen - in diesem Fall könnte es eine/n stärkere/n Moderator/in in der Durchführung benötigen. Im entgegengesetzten Fall könnte der Debatte ein nachfragend, motivierender Akteur gut tun.
+                                p Verkürzte Beispiele für Fragestellungen:
+                                ul
+                                    li "Sollen all-in Arbeitsverträge stärker reguliert werden?" (Rollen: Arbeitnehmer-/Arbeitgeberseite; Rahmen: Kollektivvertragsverhandlungen)
+                                    li "Soll die ABC AG ein riskantes aber spektakuläres Marketingprojekt in Kooperation mit einem Extremsportler durchführen?" (Rollen: Vorstand/Aktionäre; Rahmen: Hauptversammlung)
+                        tr
+                            td
+                                strong Varianten
+                            td
+                                | Die Pro-Kontra Debatte kann in unterschiedlichen Ausprägungen durchgeführt werden. Einige optionale Elemente wurden in der Beschreibung der Methode schon angeführt. Diese Methode lebt auch von Ihrer eingenommenen Rolle. Sie können in die Moderator/inn/en-, Diskutant/inn/en- oder Analyst/inn/enrolle schlüpfen und somit in der Lehrveranstaltung punktuell besondere Akzente setzen bzw. gewissen Aspekten ein besonderes Gewicht geben. Ein (vielleicht kurzfristig notwendiger - oder geplanter) Rollenwechsel während der Übung kann den Fokus auf unterschiedliche Elemente legen. (Als Reviewer/in - stärkerer Fokus auf dem argumentativen Ablauf sowie der Metaebene; Als Diskutant/in - stärkerer Fokus auf den Argumenten, weil man ja gegen Sie antreten muss.)
+
+            h2.game-container
+                span.plus#11(onclick=`openGame(10)`,style="display:block;") &plus;
+                span.minus#12(onclick=`closeGame(10)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(10)') Turn to your neighbour
+                table.table.table-jig.table-hover.table-template#10(style="display:none;")
+                    tbody
+                        tr
+                            td
+                                strong Wie?
+                            td
+                                p(dir="ltr" id="docs-internal-guid-0dcc808f-7fff-3d7f-0956-c2c759957a2c") Geben Sie den Studierenden eine Frage- oder Problemstellung zur Bearbeitung. Dies kann z. B. sein:
+                                ul
+                                    li Eine Berechnung durchführen
+                                    li Einen Graphen oder ein Diagramm zu erstellen oder zu analysieren
+                                    li Ein bis zwei Lösungsansätze zu einer Problemstellung vorzuschlagen
+                                    li Die weitere Vorgehensweise in einem Prozess zu bestimmen
+                                p(dir="ltr") Lassen Sie den Studierenden zwei bis drei Minuten Zeit, um in Paaren zu diskutieren. Sammeln Sie einige Antworten, bevor Sie die Beantwortung der Frage- oder Problemstellung zusammenfassen. Überlegen Sie sich vorab, wie Sie die Aufmerksamkeit der Studierenden wieder auf sich lenken können (z. B. Tonsignal, Licht)
+                        tr
+                            td
+                                strong Wofür?
+                            td
+                                ul
+                                    li Die Hemmschwelle senken, damit Studierende sich in einer großen Gruppe äußern
+                                    li Ermöglichen, dass Studierende miteinander diskutieren und sich über ihr inhaltliches Verständnis austauschen
+                                    li Studierenden Zeit geben, um über das Gehörte nachzudenken
+                                    li Studierende anregen, sich problemorientiert mit einem Thema auseinanderzusetzen und es zu diskutieren
+
+            h2.game-container
+                span.plus#14(onclick=`openGame(13)`,style="display:block;") &plus;
+                span.minus#15(onclick=`closeGame(13)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(13)') Rollenspiel
+                table.table.table-jig.table-hover.table-template#13(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Was und wofür?
+                            td
+                                p Das Rollenspiel ist eine Methode, bei der die Lebenswirklichkeit mit spielerischem Agieren verbunden wird. Alltagssituationen, Probleme oder Konflikte können im Rollenspiel nachempfunden oder vorausschauend bearbeitet werden. Studierende übernehmen eine Rolle und die damit verbundenen Interessen. Ziel dieser Methode ist es, Einstellungen und Verhaltensweisen zu verdeutlichen und Ansatzpunkte für Veränderungen aufzuzeigen. Die Methode eignet sich zur Diagnose und Lösung sozialer Konflikte und Probleme und zum Einüben neuer Handlungen.
+                                p Diese Methode fördert bei Studierenden, dass sie…
+                                ul
+                                    li eigene Verhaltensweisen bewusst erleben und reflektieren.
+                                    li neue Verhaltensweisen einüben.
+                                    li aufmerksam auf ein Problemfeld werden.
+                                    li Rollen- und situationsgemäß handeln.
+                        tr
+                            td
+                                strong Wie?
+                            td
+                                p Grundform: vorbereitetes Rollenspiel
+                                ul
+                                    li Legen Sie fest, wie das Rollenspiel beendet werden soll: durch Ablauf der Zeit, durch Erreichen eines sinnvollen Ergebnisses (z. B. Lösung des Konflikts) oder durch Ihre Entscheidung.
+                                    li Lassen Sie die Studierenden das Rollenspiel ohne Eingriff von außen durchführen.
+                                    li Vergessen Sie nicht auf eine abschließende Reflexionsrunde in Hinblick auf die&nbsp;Rollenwahrnehmung, die diskutierten Inhalte und die daraus resultierenden Handlungsalternativen.
+                        tr
+                            td
+                                strong Vorbereitung
+                            td
+                                ul
+                                    li Ausgangsszenario entwerfen: Wer trifft sich wann, wo, mit wem, warum, wie lange?
+                                    li Informationen zu jeder Rolle zusammenstellen: z. B. Fähigkeiten, Funktion, biographischer Hintergrund, Alter, Geschlecht, Charakterzüge etc.
+                                    li Leitfragen für Aktivitätsphase vorbereiten, um Aktivitäten gezielt anregen zu können
+                                    li Rollenverteilung festlegen → Variante: Rollenwahl durch Zufall, durch Studierende oder durch Entscheidung des/der Lehrenden bestimmen
+                        tr
+                            td
+                                strong Varianten
+                            td
+                                p Variante 1:
+                                br
+                                | Nachahmen vordefinierter Rollen evtl. auch mit Zielvorgabe.
+                                p Variante 2:
+                                br
+                                | Das jeweilige Rollenverhalten wird nicht vorgegeben, sondern in der Spielsituation spontan (in Kleingruppen) entwickelt.
+
+            h2.game-container
+                span.plus#17(onclick=`openGame(16)`,style="display:block;") &plus;
+                span.minus#18(onclick=`closeGame(16)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(16)') Posterpräsentation
+                table.table.table-jig.table-hover.table-template#16(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Was und wofür?
+                            td
+                                p(dir="ltr") Posterpräsentationen wurden ursprünglich als Präsentationsform für Konferenzen entwickelt, werden aber mittlerweile immer häufiger auch im Hochschulbereich eingesetzt. Posterpräsentationen bestehen aus Postern, die während eines bestimmten Zeitraums im Lehrraum aufgehängt werden. Die Poster werden von den Verfasser/inne/n kurz vorgestellt und/oder diese stehen für Fragen zur Verfügung, während die anderen Studierenden frei durch den Raum gehen und die Poster betrachten können.
+                                p(dir="ltr") Posterpräsentationen haben gegenüber "herkömmlichen Präsentationen" den Vorteil, dass…
+                                ul
+                                    li mehrere Arbeiten zur gleichen Zeit präsentiert und verglichen werden können.
+                                    li die Studierenden lernen, komplexe Inhalte anschaulich und prägnant zu formulieren (Zwang der Reduktion).
+                                    li ein Dialog entstehen kann: Die Studierenden können Fragen stellen, auf die der/die Poster-Ersteller/in direkt reagieren kann, aber es können auch Erfahrungen ausgetauscht und Tipps gegeben werden.
+                                    li die Studierenden (auch körperlich) aktiviert werden.
+                                    li die Lernerfolge der Lehrveranstaltung auch für Außenstehende sichtbar gemacht werden können indem die Poster z. B. für Studierende oder&nbsp;Lehrende aus anderen Lehrveranstaltung zugänglich gemacht werden.
+                                    li die Studierenden ein wichtiges wissenschaftliches Handwerk erlernen: Nach dem Studium ist es nicht unwahrscheinlich, dass wissenschaftliche Arbeiten auf Konferenzen oder ähnlichen Veranstaltungen in Posterform präsentiert werden sollen.
+                                p(dir="ltr") Die Methode können Sie einsetzen:
+                                ul
+                                    li Zur Präsentation von Arbeits- und Forschungsergebnissen (z. B. nach einer Gruppenarbeit)
+                                    li Als "Kurzreferate"&nbsp;um Themenblöcke zu erarbeiten, zu vergleichen und zu diskutieren
+                                    li Gegen Ende der Lehrveranstaltung zur Präsentation der Seminararbeitsthemen bzw. der fertigen Seminararbeiten
+                        tr
+                            td
+                                strong Wie?
+                            td
+                                p(dir="ltr") Die Studierenden haben die Aufgabe, Poster zu erstellen und diese in die Lehrveranstaltung mitzunehmen. Auf dem Poster müssen alle wesentliche Teile des Themas enthalten sein. Wenn das Thema die Präsentation einer (empirischen) Seminararbeit ist wären das Titel, Abstract, Theorie und bisher verfügbare empirische Ergebnisse sowie daraus abgeleitete Fragestellung, Methode, Ergebnisse, Diskussion und Literaturangaben.
+                                p(dir="ltr") Die Poster werden im Raum aufgehängt und die Studierenden stellen ihre Poster nacheinander (jeweils höchstens fünf Minuten lang) vor. Danach besteht die Möglichkeit für die Studierenden, alle Poster genauer zu betrachten, und mit den Posterverfasser/inne/n ins Gespräch zu kommen. Abschließend können im Plenum die wichtigsten Ergebnisse und Rückmeldungen diskutiert werden.
+                                p(dir="ltr") Für die Beurteilung der Poster können folgende Kriterien angewandt werden:
+                                ul
+                                    li Visuelle Darstellung des Inhalts (Nachvollziehbarkeit, Verständlichkeit, Prägnanz, Übersichtlichkeit,…)
+                                    li Struktur und Aufbau (Logik des Aufbaus, sinnvolle Anordnung der Elemente,…)
+                                    li Visuelle Gestaltung (Lesbarkeit, Verhältnis Bild/Text, Ästhetik, Kreativität, Originalität…)
+                                    li Präsentation des Posters (Inhalte, Vortragsstil, Einbindung des Poster,..)
+                        tr
+                            td
+                                strong Vorbereitung
+                            td Wenn es sich um die Präsentation von fertigen Seminararbeiten handelt, sollten Sie die Arbeiten im Vorfeld bereits erhalten und gelesen haben, um die Poster beurteilen zu können.
+                        tr
+                            td
+                                strong Varianten
+                            td Die Poster können nach LV-Ende auch für andere Personen zugänglich gemacht werden, indem sie beispielsweise in Gängen oder Aufenthaltsräumen aufgehängt werden.
+
+            h2.game-container
+                span.plus#20(onclick=`openGame(19)`,style="display:block;") &plus;
+                span.minus#21(onclick=`closeGame(19)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(19)') Debatte
+                table.table.table-jig.table-hover.table-template#19(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Wie?
+                            td
+                                ul
+                                    li Erklären Sie den Studierenden den Hintergrund der Debatte und warum Sie debattieren möchten
+                                    li Teilen Sie die Studierenden entsprechend den zu vertretenden Standpunkten in zwei oder mehr Gruppen
+                                        strong TIPP:  Einfach ist eine räumliche Einteilung: Alle rechts im Raum Sitzenden vertreten einen Standpunkt, alle links Sitzenden den Gegenstandpunkt
+                                    li Lassen Sie, während Sie moderieren, Sprecher/innen per Handzeichen aufzeigen
+                                    li Beenden Sie die Debatte nach 10 bis 15 Minuten
+                                    li Fassen Sie zusammen und reflektieren Sie das Gesagte
+                            td
+                        tr
+                            td
+                                strong Wofür?
+                            td
+                                ul
+                                    li Raum für Diskussion in kleineren und größeren LV-Gruppen schaffen
+                                    li Ein Thema oder die Lösung eines Problems aus unterschiedlichen Perspektiven bzw. Standpunkten diskutieren
+                                    li Die Diskussionsleitung behalten
+                                    li Einen vertraulichen Rahmen schaffen, in dem Studierende sich – als Vertreter/innen einer Gruppe – eher trauen, sich zu äußern
+
+            h2.game-container
+                span.plus#23(onclick=`openGame(22)`,style="display:block;") &plus;
+                span.minus#24(onclick=`closeGame(22)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(22)') Glückstopf
+                table.table.table-jig.table-hover.table-template#22(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Was und wofür?
+                            td
+                                p Der Glückstopf ist eine aktivierende Methode, die Studierenden helfen soll, ihre Kenntnisse von wesentlichen Begriffen des Unterrichtsthemas zu überprüfen und diese zu vertiefen und zu verfestigen. Dabei werden die Begriffe in Kleingruppen erarbeitet, wodurch sich die Studierenden die zentralen Themen der Lehrveranstaltung nochmals vergegenwärtigen können. Sie sind bei der Gruppenarbeit nur stille/r Beobachter/in.
+                                p Die Methode eignet sich:
+                                ul
+                                    li als Abschluss eines Themengebiets.
+                                    li am Ende einer Lehreinheit.
+                                    li nach Referaten oder Gruppenarbeiten.
+                                p Diese Methode dient dazu, dass Studierende…
+                                ul
+                                    li den aktuellen Wissensstand überprüfen, vertiefen, wiederholen aber auch strukturieren können.
+                                    li zentrale Begriffe konkretisieren und kontextualisieren können.
+                                    li frei vor einer Gruppe reden und aktiv zuhören können.
+                                    li direkte Rückmeldungen über ihren Wissensstand und Lernerfolge erhalten können.
+                                    li aktiv einbezogen werden.
+                            td
+                        tr
+                            td
+                                strong Wie?
+                            td
+                                ol
+                                    li Definieren Sie das zu bearbeitende Themengebiet.
+                                    li Die Großgruppe wird in mehrere Kleingruppe (zu ca. 5 Personen) aufgeteilt.
+                                    li Die Kleingruppen bekommen den Auftrag, einen oder mehrere Schlüsselbegriffe des Themas auf eine Moderationskarte zu schreiben. Die Moderationskarte(n) werden in einen "Glückstopf" gelegt.
+                                    li Jede Gruppe zieht eine oder mehrere Karten aus dem Glückstopf, die Gruppe versucht nun gemeinsam, die Begriffe zu erklären.
+                                    li Im Plenum werden mögliche Unklarheiten besprochen.
+                            td
+                        tr
+                            td
+                                strong Vorbereitung
+                            td
+                                p Moderationskarten, Stifte und Glückstopf mitnehmen
+                        tr
+                            td
+                                strong Varianten
+                            td
+                                p Zusätzlich zur Diskussion kann für jeden Begriff eine schriftliche Erläuterung (z. B. auf einem Flipchart) festgehalten werden.
+                                p Eine Variante der Methode wäre die Verwendung von vorgefertigten Karten mit vorgefertigten Begriffen. Der Vorteil hierbei ist, dass Zeit gespart werden kann und Sie als Lehrperson stärker steuernd eingreifen können. Nachteilig ist allerdings, dass dadurch das aktivierende Element der Übung teilweise verloren geht. Die Methode kann auch dahingehend variiert werden, dass ein Gruppenmitglied eine Karte ziehen und diese alleine vor der Gruppe erläutern muss. Die anderen Gruppenmitglieder können bei dieser Variante Fragen stellen und die Erläuterung kommentieren bzw. ggf. korrigieren oder ergänzen.
+
+            h2.game-container
+                span.plus#26(onclick=`openGame(25)`,style="display:block;") &plus;
+                span.minus#27(onclick=`closeGame(25)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(25)') Minutepaper
+                table.table.table-jig.table-hover.table-template#25(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Wie?
+                            td
+                                p Fordern Sie die Studierenden auf, folgende zwei Fragen kurz schriftlich zu beantworten:
+                                ul
+                                    li Was ist für Sie das Wichtigste, das Sie heute gelernt haben?
+                                    li Welche wesentliche Frage ist für Sie heute unbeantwortet geblieben?
+                                p In diesem #[a(href="https://www.youtube.com/watch?v=yTBBXUo3os8") Video] (externer Link) wird das Minutepaper kurz und bündig erklärt.
+                        tr
+                            td
+                                strong Wofür?
+                            td
+                                ul
+                                    li Für Sie als Überprüfung: Was haben die Studierenden gelernt? Was erachten die Studierenden als relevant?
+                                    li Die Studierenden lernen, über Inhalte der Lehrveranstaltung zu reflektieren und das eigene Verständnis zu überprüfen
+                                    li Unklarheiten werden rechtzeitig beseitigen
+                        tr
+                            td
+                                strong Varianten
+                            td
+                                p Chain-Notes:
+                                p Geben Sie ein großes Kuvert, auf dem eine Frage notiert ist, durch. Erreicht das Kuvert eine/n Studierende/n, hat sie/er etwa eine Minute Zeit, um die Frage auf einem Kärtchen zu beantworten, es in den Umschlag zu stecken und diesen weiterzugeben.
+                                p The Muddiest Point:
+                                p Erfragen Sie von den Studierenden, welcher wesentliche inhaltliche Aspekt für sie in der LV-Einheit unklar geblieben ist. In diesem #[a(href="https://www.youtube.com/watch?time_continue=5&v=SvT6RmuZigw") Video] (externer Link) werden die Variante "The Muddiest Point" und eine interaktive Durchführung mit Moderationskärtchen vorgestellt.
+
+            h2.game-container
+                span.plus#29(onclick=`openGame(28)`,style="display:block;") &plus;
+                span.minus#30(onclick=`closeGame(28)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(28)') Open Space
+                table.table.table-jig.table-hover.table-template#28(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Was und wofür?
+                            td
+                                p Open Space bedeutet "offener Raum“ oder "Freiraum" und ist ursprünglich als Methode zur Strukturierung von Konferenzen entwickelt worden. Open Space fördert die Prinzipien der Selbstorganisation und Selbstbestimmung der teilnehmenden Personen, indem die Teilnehmer/innen eigene Themen ins Plenum bringen und diese dann in Arbeitsgruppen selbst erarbeiten. Es gibt also keine vorgegebenen Themen, ebenso wenig wie vorgegebene Aufgaben oder festgelegte Redner/innen.
+                                p Die Methode eignet sich:
+                                ul
+                                    li Zur Einführung in die Lehrveranstaltung
+                                    li Zur thematischen Strukturierung der Lehrveranstaltung
+                                    li Als Impuls für Gruppen- oder Seminararbeiten
+                                p Die Methode des Open Space bringt folgende Vorteile mit sich...
+                                ul
+                                    li Durch Selbstbestimmung und Freiheit wird engagierte und motivierte Arbeit ermöglicht.
+                                    li Komplexe Themen können in der Gruppe arbeitet werden.
+                                    li Der Einfluss und die Mitwirkungsmöglichkeiten der Studierenden werden maximiert.
+                                    li Die zwanglose Atmosphäre fördert produktives Arbeiten.
+                                    li Jede/r Einzelne kann sich gemäß seinen Fähigkeiten und Kompetenzen einbringen.
+                                    li Durch das gemeinsame Arbeiten können Kommunikations- und Kooperationsfähigkeiten sowie der Umgang mit Kritik gefördert und neue Kontakte geknüpft werden.
+                                    li Die Auseinandersetzung mit dem Thema kann Problemlösungs- und Kooperationskompetenzen und analytische Fähigkeiten verbessern.
+                        tr
+                            td
+                                strong Wie?
+                            td
+                                p 1. Durchführung:
+                                ul
+                                    li Zu Beginn der Einheit wird ein Sesselkreis gebildet. Sie eröffnen den "Raum" und geben ein Leitthema vor, die Studierenden werden anhand diesem zur Themensammlung aufgefordert. Die Vorschläge werden auf Moderationskarten geschrieben und auf einer Pinnwand/Tafel befestigt.
+                                    li Sobald keine Vorschläge mehr eingebracht werden können sich die Studierenden am "Marktplatz" zu Gruppen zusammenfinden, wobei jede/r selbst wählen kann, zu welchem Thema er/sie arbeiten möchte.
+                                    li Danach werden die Themen in den Gruppen selbstständig erarbeitet. Sie sind dabei Ansprechpartner/in bei Fragen, bleiben aber prinzipiell im Hintergrund.
+                                    li Am Ende der Einheit werden die Ergebnisse präsentiert und reflektiert - der Raum wird "geschlossen".
+                                p 2. Leitlinien:
+                                ul
+                                    li Die Gruppengröße kann variieren
+                                    li Der Arbeitsprozess der Gruppe ist nicht festgelegt, ungeplantes kann kreative Lösungen hervorbringen.
+                                    li Die Gruppe sollte sich die Zeit im Rahmen der Möglichkeit selbst frei einteilen können.
+                                    li Wenn ein Thema ausreichend behandelt wurde, können sich die Gruppenmitglieder einer anderen Gruppe zuteilen, wenn ein Thema trotz Ablauf der Zeit noch nicht ausreichend behandelt wurde, sollte dafür Zeit geschaffen werden.
+                                    li Wenn ein/e Studierende/r nichts Produktives mehr beitragen kann, kann bzw. soll er/sie in eine andere Gruppe wechseln.
+                        tr
+                            td
+                                strong Vorbereitung
+                            td
+                                p Geben Sie das Gesamtthema vor und bringen die benötigten Materialien mit (Moderationskarten, Flipchartpapier).
+                        tr
+                            td
+                                strong Varianten
+                            td
+                                p Wenn es die Form der Lehrveranstaltung zulässt, kann die Open Space-Methode auch über mehrere LV-Einheiten hinweg durchgeführt werden. Der Ablauf ähnelt bei dieser Variante dem
+
+            h2.game-container
+                span.plus#32(onclick=`openGame(31)`,style="display:block;") &plus;
+                span.minus#33(onclick=`closeGame(31)`,style="display:none;") &minus;
+                .jigsaw_table(onclick='toggelGame(31)') Background-Knowledge-Probe
+                table.table.table-jig.table-hover.table-template#31(style="display:none;")
+                    thead
+                    tbody
+                        tr
+                            td
+                                strong Wie?
+                            td
+                                ol
+                                    li Erstellen Sie einen Fragebogen, der ca. 10 bis 20 Multiple-Choice-Fragen und einige zu vervollständigende Satzanfänge oder Kurzantwortaufgaben beinhaltet.
+                                    li Lassen Sie die Studierenden den Fragebogen zu Beginn des Semesters beantworten.
+                        tr
+                            td
+                                strong Wofür?
+                            td
+                                ul
+                                    li Dadurch können Sie Vorkenntnisse und Eingangsvoraussetzungen der Studierenden einschätzen und berücksichtigen
+                                    li Sie erhalten Rückmeldungen, die für die Planung, den Ablauf, die Schwerpunktsetzung der Lehrveranstaltung relevant sind
+                                    li Die Studierenden lernen, ihre eigenen Vorkenntnisse einzuschätzen
+                                    li Die Studierenden können dadurch rechtzeitig Maßnahmen zur Verringerung möglicher Defizite ergreifen
+                                    li Die Studierenden erfahren Inhalte der Lehrveranstaltung frühzeitig (durch den Fragebogen)
+                        tr
+                            td
+                                strong Varianten
+                            td
+                                ul
+                                    li Sie können die Studierenden die Antworten in kleineren Gruppen ausarbeiten und danach präsentieren lassen
+                                    li Studierende können die Fragen zunächst allein beantworten und sich nach Ablauf der dafür vorgesehenen Zeit gegenseitig interviewen
+
+                
+                    script.
+                       function openGame(value){
+                        document.getElementById(value).style.display = "block";
+                        document.getElementById(value+1).style.display = "none";
+                        document.getElementById(value+2).style.display = "block";
+                       };
+                       function closeGame(value){
+                        document.getElementById(value).style.display = "none";
+                        document.getElementById(value+1).style.display = "block";
+                        document.getElementById(value+2).style.display = "none";
+                       };
+                        function toggelGame(value){
+                        const plus = value+1;
+                        const minus = value +2;
+                        const gameContant = document.getElementById(value);
+                        const gamePlus = document.getElementById(plus);
+                        const gameMinus = document.getElementById(minus);
+
+                        if (gameContant.style.display === 'none') {
+                            gameContant.style.display = 'block';
+                        } else  {
+                            gameContant.style.display = 'none';
+                        }
+
+                        if (gamePlus.style.display === 'none') {
+                            gamePlus.style.display = 'block';
+                        } else {
+                            gamePlus.style.display = 'none';
+                        }
+
+                        if (gameMinus.style.display === 'none') {
+                            gameMinus.style.display = 'block';
+                        } else {
+                            gameMinus.style.display = 'none';
+                        }
+                      
+                       };

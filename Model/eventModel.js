@@ -17,6 +17,10 @@ const eventSchema = new mongoose.Schema({
     type: String,
     required: [true, 'the event must have a espId to connect'],
   },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
   date: {
     type: String,
     required: [true, 'the event must have a Date'],
@@ -61,6 +65,7 @@ eventSchema.pre('save', function () {
   //this points to current review
   this.date = new Date(this.date).toISOString().split('T')[0];
 });
+// QRcode
 eventSchema.post('save', async function () {
   //this points to current review
   this.date = new Date(this.date).toISOString().split('T')[0];
