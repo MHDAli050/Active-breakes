@@ -27,8 +27,9 @@ router.get('/overview', authController.isLoggedIn, viewsController.getOverview);
 router.get('/tours/:slug', authController.isLoggedIn, viewsController.getTour);
 router.get('/login', authController.isLoggedIn, viewsController.getLogin);
 router.get('/my-tours', authController.protect, viewsController.getMyTours);
-router.use(authController.protect);
 router.get('/signup', viewsController.getsignup);
+router.use(authController.protect);
+
 router.get('/jigsawMethod', viewsController.getJigsawMethod);
 router.get(
   '/createevent',
